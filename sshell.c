@@ -7,7 +7,7 @@
 
 #define MAX_COMMAND_LENGTH 100
 void print_prompt() {
-    printf("simple_shell> ");
+    printf("$ ");
 }
 
 int main() {
@@ -26,6 +26,11 @@ int main() {
         size_t command_length = strlen(command);
         if (command_length > 0 && command[command_length - 1] == '\n') {
             command[command_length - 1] = '\0';
+        }
+
+	if (strcmp(command, "exit") == 0) {
+            printf("Logging off\n");
+            break;
         }
 
         // Fork the child
