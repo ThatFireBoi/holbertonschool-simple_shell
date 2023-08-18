@@ -28,6 +28,7 @@ int main() {
             command[command_length - 1] = '\0';
         }
 
+	//Handles exit command
 	if (strcmp(command, "exit") == 0) {
             printf("Logging off\n");
             break;
