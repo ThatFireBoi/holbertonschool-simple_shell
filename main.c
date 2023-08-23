@@ -7,7 +7,7 @@
  *
  * @argv: argument vector
  *
- * @envp: environment variables
+ * @env: environment variables
  *
  * Return: Zero
  */
