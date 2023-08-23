@@ -18,7 +18,7 @@ void noninteractive_mode(char **env)
 		exit(1);
 	}
 
-    printf("Non-Interactive Mode\n");
+    /* printf("Non-Interactive Mode\n"); */
 
     while ((read = getline(&input_buffer, &input_size, stdin)) != -1) {
         /* Remove newline character if present */
