@@ -13,7 +13,8 @@ void noninteractive_mode(char **env)
 	ssize_t read;
 	size_t input_size = BUFFER_SIZE;
 
-	if (input_buffer == NULL) {
+	if (input_buffer == NULL)
+	{
 		fprintf(stderr, "Memory allocation failed\n");
 		exit(1);
 	}
