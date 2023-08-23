@@ -49,7 +49,7 @@ void execute(char *command, char **env) {
         }
 	} else {
 		/* Search for the command in the directories listed in PATH */
-		char **paths = get_paths();
+		char **paths = handle_paths();
 		int i;
 		for (i = 0; paths[i] != NULL; i++) {
 			char *full_path = (char *)malloc(strlen(paths[i]) + strlen(tokens[0]) + 2);
