@@ -12,7 +12,7 @@
 
 int main(int argc, char **argv, char **env);
 void execute(char *command, char **env);
-char **get_paths(void);
+char **handle_paths(void);
 void noninteractive_mode(char **env);
 int is_empty_or_whitespace(const char *str);
 
