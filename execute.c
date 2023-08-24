@@ -47,8 +47,7 @@ void execute(char *command, char **env)
 		/* Execute the command using execve */
 			if (execve(tokens[0], tokens, env) == -1)
 			{
-				perror("execve error");
-				exit(EXIT_FAILURE); /* Exit child process with failure status */
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
