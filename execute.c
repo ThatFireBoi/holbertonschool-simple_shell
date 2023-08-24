@@ -30,9 +30,9 @@ char **tokenize_command(char *command)
 		}
 		tokens[token_count] = token;
 		token_count++;
+		tokens[token_count] = NULL;
 		token = strtok(NULL, " \n");
 	}
-	tokens[token_count] = NULL;
 	return tokens;
 }
 
@@ -73,7 +73,6 @@ void execute_command(char **tokens, char **env)
 	else /* Parent process */
 	{
 		waitpid(child_pid, NULL, 0);
-		free(tokens);
 	}
 }
 
@@ -123,13 +122,15 @@ void search_and_execute(char **tokens, char **env)
 
 char *build_full_path(char *dir, char *command)
 {
-	char *full_path = (char *)malloc(strlen(dir) + strlen(command) + 2);
+	size_t full_path_length = strlen(dir) + strlen(command) + 2;
+
+	char *full_path = (char *)malloc(full_path_length);
 	if (full_path == NULL)
 	{
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
-	sprintf(full_path, "%s/%s", dir, command);
+	snprintf(full_path, full_path_length, "%s/%s", dir, command);
 	return (full_path);
 }
 
