@@ -64,7 +64,7 @@ void execute(char *command, char **env)
 			{
 				perror("malloc");
 				free(paths);
-				exit(EXIT_FAILURE);
+				exit(2);
 			}
 			sprintf(full_path, "%s/%s", paths[i], tokens[0]);
 			if (access(full_path, X_OK) == 0)
@@ -72,7 +72,7 @@ void execute(char *command, char **env)
 				if (execve(full_path, tokens, env) == -1)
 				{
 					perror("execve error");
-					exit(EXIT_FAILURE);
+					exit(2);
 				}
 				free(full_path);
 				return;
@@ -81,7 +81,7 @@ void execute(char *command, char **env)
 		}
 		fprintf(stderr, "Command not found\n");
 		free(paths);
-		exit(EXIT_FAILURE);
+		exit(2);
 	}
 	} else
 	{ /* Parent process */
