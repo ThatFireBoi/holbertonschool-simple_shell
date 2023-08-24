@@ -41,7 +41,8 @@ void execute(char *command, char **env)
 		free(tokens); /* Free allocated memory */
 		return;
 	}
-	if (child_pid == 0) { /* Child process */
+	if (child_pid == 0) /* Child process */
+	{
 		if (tokens[0][0] == '/')
 		{
 		/* Execute the command using execve */
@@ -83,8 +84,9 @@ void execute(char *command, char **env)
 		fprintf(stderr, "Command not found\n");
 		free(paths);
 		exit(EXIT_FAILURE);
+		}
 	}
-	} else
+	else
 	{ /* Parent process */
 		/* Wait for the child process to complete */
 		waitpid(child_pid, NULL, 0);
