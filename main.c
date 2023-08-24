@@ -14,7 +14,6 @@
 
 int main(int argc, char **argv, char **env)
 {
-	char **tokens;
 	char *input = NULL;
 	size_t len = 0;
 	ssize_t read;
@@ -43,12 +42,7 @@ int main(int argc, char **argv, char **env)
 				continue;
 			if (input[0] == '\0' || input[0] == ' ')
 				continue;
-			tokens = tokenize_command(input);
-			if (tokens)
-			{
-				execute_command(tokens, env); /* Execute the command entered by the user */
-				free(tokens);
-			}
+			execute(input, env); /* Execute the command entered by the user */
 		}
 		free(input);
 		return (0);
