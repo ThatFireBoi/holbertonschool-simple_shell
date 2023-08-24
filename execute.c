@@ -8,6 +8,8 @@
  * Return: An array of tokens
  */
 
+void execute_command(char **tokens, char **env);
+
 char **tokenize_command(char *command)
 {
 	char **tokens = NULL;
@@ -16,7 +18,7 @@ char **tokenize_command(char *command)
 
 	token = strtok(command, " \n");
 	if (token == NULL)
-		return (NULL);
+		return NULL;
 
 	while (token != NULL)
 	{
@@ -24,14 +26,14 @@ char **tokenize_command(char *command)
 		if (tokens == NULL)
 		{
 			perror("realloc");
-			return (NULL);
+			return NULL;
 		}
 		tokens[token_count] = token;
 		token_count++;
 		token = strtok(NULL, " \n");
 	}
 	tokens[token_count] = NULL;
-	return (tokens);
+	return tokens;
 }
 
 /**
@@ -110,6 +112,28 @@ void search_and_execute(char **tokens, char **env)
 }
 
 /**
+ * build_full_path - Buld the full path for a command using a directory
+ *
+ * @dir: Directory path
+ *
+ * @command: Command name
+ *
+ * Return: Returns the full path
+ */
+
+char *build_full_path(char *dir, char *command)
+{
+	char *full_path = (char *)malloc(strlen(dir) + strlen(command) + 2);
+	if (full_path == NULL)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	sprintf(full_path, "%s/%s", dir, command);
+	return (full_path);
+}
+
+/**
  * execute - Main execution function to execute a command
  *
  * @command: The command to execute
@@ -120,7 +144,6 @@ void search_and_execute(char **tokens, char **env)
 void execute(char *command, char **env)
 {
 	char **tokens = tokenize_command(command);
-
 	if (tokens != NULL)
 	{
 		execute_command(tokens, env);
