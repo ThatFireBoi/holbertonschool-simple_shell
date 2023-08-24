@@ -23,9 +23,7 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 
 	if (is_non_interactive)
-	{
 		noninteractive_mode(env);
-	}
 	else
 	{
 		while (1)
@@ -40,15 +38,13 @@ int main(int argc, char **argv, char **env)
 			if (input[read - 1] == '\n')
 				input[read - 1] = '\0'; /* Remove newline character */
 			if (strcmp(input, "exit") == 0)
-			{
 				break;
-			}
 			if (isspace((unsigned char)input[0]))
 				continue;
 			if (input[0] == '\0' || input[0] == ' ')
 				continue;
 			tokens = tokenize_command(input);
-			if (tokens != NULL)
+			if (tokens)
 			{
 				execute_command(tokens, env); /* Execute the command entered by the user */
 				free(tokens);
@@ -56,7 +52,6 @@ int main(int argc, char **argv, char **env)
 		}
 		free(input);
 		return (0);
-	}
-	free(input);
+	} free(input);
 	return (0);
 }
