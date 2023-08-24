@@ -8,8 +8,6 @@
  * Return: An array of tokens
  */
 
-void execute_command(char **tokens, char **env);
-
 char **tokenize_command(char *command)
 {
 	char **tokens = NULL;
@@ -18,7 +16,7 @@ char **tokenize_command(char *command)
 
 	token = strtok(command, " \n");
 	if (token == NULL)
-		return NULL;
+		return (NULL);
 
 	while (token != NULL)
 	{
@@ -26,14 +24,14 @@ char **tokenize_command(char *command)
 		if (tokens == NULL)
 		{
 			perror("realloc");
-			return NULL;
+			return (NULL);
 		}
 		tokens[token_count] = token;
 		token_count++;
 		tokens[token_count] = NULL;
 		token = strtok(NULL, " \n");
 	}
-	return tokens;
+	return (tokens);
 }
 
 /**
@@ -125,6 +123,7 @@ char *build_full_path(char *dir, char *command)
 	size_t full_path_length = strlen(dir) + strlen(command) + 2;
 
 	char *full_path = (char *)malloc(full_path_length);
+
 	if (full_path == NULL)
 	{
 		perror("malloc");
@@ -145,6 +144,7 @@ char *build_full_path(char *dir, char *command)
 void execute(char *command, char **env)
 {
 	char **tokens = tokenize_command(command);
+
 	if (tokens != NULL)
 	{
 		execute_command(tokens, env);
