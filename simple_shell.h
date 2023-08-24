@@ -15,5 +15,6 @@ void execute(char *command, char **env);
 char **handle_paths(void);
 void noninteractive_mode(char **env);
 int is_empty_or_whitespace(const char *str);
+void modify_env(char **env, const char *variable_to_keep);
 
 #endif
