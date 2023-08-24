@@ -11,6 +11,8 @@
 void execute(char *command, char **env)
 {
 	pid_t child_pid;
+	int child_status;
+	int exit_status = WEXITSTATUS(child_status);
 	char *token = NULL;
 	char **tokens = NULL;
 	int token_count = 0;
@@ -47,6 +49,7 @@ void execute(char *command, char **env)
 		/* Execute the command using execve */
 			if (execve(tokens[0], tokens, env) == -1)
 			{
+				perror("execve error");
 				exit(2);
 			}
 		}
@@ -86,7 +89,14 @@ void execute(char *command, char **env)
 	} else
 	{ /* Parent process */
 		/* Wait for the child process to complete */
-		waitpid(child_pid, NULL, 0);
+		waitpid(child_pid, &child_status, 0);
+		if (WIFEXITED(child_status))
+		{
+			if (exit_status != 0)
+			{
+				exit(exit_status);
+			}
+		}
 		free(tokens); /* Free allocated memory */
 	}
 }
