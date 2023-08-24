@@ -55,7 +55,15 @@ void execute_command(char **tokens, char **env)
 	}
 	if (child_pid == 0) /* Child process */
 	{
-		if (tokens[0][0] == '/')
+		if (strcmp(tokens[0], "/bin/ls") == 0)
+		{
+			if (execve(tokens[0], tokens, env) == -1)
+			{
+				perror("execve error");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (tokens[0][0] == '/')
 		{
 			if (execve(tokens[0], tokens, env) == -1)
 			{
