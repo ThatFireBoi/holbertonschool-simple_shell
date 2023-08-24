@@ -82,7 +82,7 @@ void execute(char *command, char **env)
 			}
 			free(full_path);
 		}
-		fprintf(stderr, "Command not found\n");
+		fprintf(stderr, "%s: 1: %s: not found\n", tokens[0], tokens[0]);
 		free(paths);
 		exit(2);
 	}
