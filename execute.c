@@ -47,7 +47,7 @@ void execute(char *command, char **env)
 		/* Execute the command using execve */
 			if (execve(tokens[0], tokens, env) == -1)
 			{
-				exit(EXIT_FAILURE);
+				exit(2);
 			}
 		}
 		else
