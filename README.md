@@ -19,6 +19,12 @@ This version of super simple shell support the next built-in
 | exit            | Exit the shell with the command exit.                                          |
 | env                 | Print the environment.                                                                    |
 
+## Difference between a function and a system call
+
+A function is a self-contained block of code that performs a specific task or tasks, while system calls are a mechanism
+by which a program can request services from the operating system. System calls provide an interface between user-level
+programs and the kernel of the operating system.
+
 ## Installation
 
 Use the [git clone](https://github.com/ThatFireBoi/holbertonschool-simple_shell.git) to install this super simple shell.
@@ -64,6 +70,10 @@ $
 
 ### Usage Examples
 
+## Allowed Editors
+
+VI, VIM, EMACS
+
 ## List of allowed functions and system calls+
 
 - all functions from string.h
@@ -103,6 +113,16 @@ $
 - wait3 (man 2 wait3)
 - wait4 (man 2 wait4)
 - write (man 2 write)
+
+## Project Tasks
+
+- Task 0: Provide a Man page, a README and a AUTHORS file for the project.
+- Task 1: Write code that passes Betty checkers.
+- Task 2: Write a UNIX command line interpreter.
+- Task 3: Simple Shell 0.1-Handle command lines with arguments
+- Task 4: Simple Shell 0.2-Handle the PATH;fork must not be called if the command does not exist.
+- Task 5: Simple Shell 0.3-Implement the exit built-in, that exits the shell.
+- Task 6: Simple Shell 0.4-Implement the env built-in, that prints the current environment.
 
 ## Contributing
 You can contribute with this shell adding some buil-int functions, feel free to make pull request.
