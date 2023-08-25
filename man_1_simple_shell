@@ -13,3 +13,37 @@ hsh \- Simple UNIX command line interpreter for Holberton School
 \f[B]hsh\f[R] is an end of semester project for Holberton where a simple
 UNIX command line interpreter is created that reads commands from either
 a file or standard input.
+.SH INVOCATION
+.PP
+Simple shell can be invoked by typing ./hsh.
+.SH NON\-INTERACTIVE
+.PP
+In addition, simple shell can be invoked via a pipe (ex.
+echo \[lq]/bin/ls\[rq] | ./hsh).
+.SH INITIALIZATION
+.PP
+The simple shell is compiled for use using gcc.
+It will be compiled with the following: \f[B]gcc \-Wall \-Werror
+\-Wextra \-pedantic \-std=gnu89 .c \-o hsh\f[R]
+.SH OPTIONS
+.PP
+The shell utilizes the char **environ.
+.SH BUILT\-INS
+.TP
+.B \f[B]env\f[R]
+instructs the program to display all the environment variables and their
+values.
+.TP
+.B \f[B]exit\f[R]
+exits out of the shell.
+Exits program with status 0.
+.SH BUGS
+.PP
+Some issues with Betty and env
+.SH SEE ALSO
+.PP
+Full documentation and sources at:
+<https://github.com/ThatFireBoi/holbertonschool-simple_shell>
+.SH AUTHORS
+.PP
+Gabriel Castro & Omar Velez
