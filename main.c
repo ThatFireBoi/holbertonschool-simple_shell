@@ -18,7 +18,8 @@ int main(int argc, char **argv, char **env)
 	ssize_t read;
 	size_t len = 0;
 	int is_non_interactive = !isatty(STDIN_FILENO);
-	(void)argc, argv;
+	(void)argc;
+	(void)argv;
 
 	if (is_non_interactive)
 		noninteractive_mode(env);
