@@ -77,7 +77,7 @@ void execute(char *command, char **env)
 			}
 			free(full_path);
 		}
-		fprintf(stderr, "%s: 1: %s: not found\n", tokens[0], tokens[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", tokens[0]);
 		free(paths);
 		exit(EXIT_FAILURE);
 	}
