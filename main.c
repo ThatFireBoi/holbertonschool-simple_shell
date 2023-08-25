@@ -7,7 +7,7 @@
  *
  * @argv: argument vector
  *
- * @envp: environment variables
+ * @env: environment variables
  *
  * Return: Zero
  */
@@ -22,38 +22,30 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 
 	if (is_non_interactive)
-	{
 		noninteractive_mode(env);
-	}
 	else
 	{
 		while (1)
 		{
 			printf("$ "); /* Shell prompt */
 			read = getline(&input, &len, stdin); /* Read user input */
-
-			if (read == -1) {
+			if (read == -1)
+			{
 				printf("\n");
 				break;
 			}
 			if (input[read - 1] == '\n')
 				input[read - 1] = '\0'; /* Remove newline character */
-
-			if (strcmp(input, "exit") == 0) {
-				printf("Exiting simple shell.\n");
+			if (strcmp(input, "exit") == 0)
 				break;
-			}
 			if (isspace((unsigned char)input[0]))
 				continue;
-
 			if (input[0] == '\0' || input[0] == ' ')
 				continue;
-
 			execute(input, env); /* Execute the command entered by the user */
 		}
 		free(input);
 		return (0);
-	}
-	free(input);
+	} free(input);
 	return (0);
 }

@@ -1,7 +1,7 @@
 #include "simple_shell.h"
 
 /**
- * get_paths - Extracts paths from the PATH environment variable
+ * handle_paths - Extracts paths from the PATH environment variable
  *
  * Return: A pointer to an array of strings containing the paths
  *         NULL on failure or if PATH is not found
@@ -31,7 +31,6 @@ char **handle_paths(void)
 		if (paths == NULL)
 		{
 			perror("error ");
-
 			free(paths);
 			return (NULL);
 		}
