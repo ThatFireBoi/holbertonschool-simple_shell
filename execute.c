@@ -14,12 +14,11 @@ void execute(char *command, char **env)
 	char *token = NULL;
 	char **tokens = NULL;
 	int token_count = 0;
-	/* Tokenize the command string */
-	token = strtok(command, " \n");
+
+	token = strtok(command, " \n"); /* Tokenize the command string */
 	if (token == NULL)
 		return;
 
-	/* Tokenize the command and store tokens in an array */
 	while (token != NULL)
 	{
 		tokens = realloc(tokens, sizeof(char *) * (token_count + 2));
@@ -33,19 +32,18 @@ void execute(char *command, char **env)
 		token = strtok(NULL, " \n");
 	}
 	tokens[token_count] = NULL; /* Set the last element to NULL */
-	/* Create the child process */
-	child_pid = fork();
+	child_pid = fork(); /* Create child process */
 	if (child_pid == -1)
 	{
 		perror("fork");
 		free(tokens); /* Free allocated memory */
 		return;
 	}
-	if (child_pid == 0) { /* Child process */
+	if (child_pid == 0) /* Child process */
+	{
 		if (tokens[0][0] == '/')
 		{
-		/* Execute the command using execve */
-			if (execve(tokens[0], tokens, env) == -1)
+			if (execve(tokens[0], tokens, env) == -1) /* Execute using execve */
 			{
 				perror("execve error");
 				exit(EXIT_FAILURE); /* Exit child process with failure status */
@@ -53,8 +51,7 @@ void execute(char *command, char **env)
 		}
 		else
 		{
-		/* Search for the command in the directories listed in PATH */
-		char **paths = handle_paths();
+		char **paths = handle_paths(); /* Search in dir listed in PATH */
 		int i;
 
 		for (i = 0; paths[i] != NULL; i++)
@@ -80,14 +77,14 @@ void execute(char *command, char **env)
 			}
 			free(full_path);
 		}
-		fprintf(stderr, "Command not found\n");
+		fprintf(stderr, "%s: 1: %s: not found\n", tokens[0], tokens[0]);
 		free(paths);
 		exit(EXIT_FAILURE);
 	}
-	} else
+	}
+	else
 	{ /* Parent process */
-		/* Wait for the child process to complete */
-		waitpid(child_pid, NULL, 0);
+		waitpid(child_pid, NULL, 0); /* Wait for child process to finish */
 		free(tokens); /* Free allocated memory */
 	}
 }
