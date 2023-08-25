@@ -9,14 +9,12 @@
 
 char **handle_paths(void)
 {
-	/* Get the value of the PATH environment variable */
+	int num_paths = 0;
 	char *path_env = NULL;
 	char *token = NULL;
-	int num_paths = 0;
 	char **paths = NULL;
 
 	path_env = getenv("PATH");
-	/* Check if PATH environment variable exists */
 	if (path_env == NULL)
 	{
 		perror("error ");
@@ -26,7 +24,6 @@ char **handle_paths(void)
 	token = strtok(path_env, ":");
 	while (token != NULL)
 	{
-		/* Allocate memory for the new path in the array */
 		paths = realloc(paths, sizeof(char *) * (num_paths + 1));
 		if (paths == NULL)
 		{
@@ -35,14 +32,13 @@ char **handle_paths(void)
 			return (NULL);
 		}
 
-		paths[num_paths] = token; /* Store the current path in the array */
-		num_paths++;			  /* You increment the num_paths counter.*/
-		token = strtok(NULL, ":"); /* Move to the next token */
+		paths[num_paths] = token;
+		num_paths++;
+		token = strtok(NULL, ":"); /* Next token */
 	}
 
-	/* Add a NULL pointer at the end to terminate the array */
 	paths = realloc(paths, sizeof(char *) * (num_paths + 1));
-	paths[num_paths] = NULL;
+	paths[num_paths] = NULL; /* End of array NULL pointer */
 
 	return (paths);
 }

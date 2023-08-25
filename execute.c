@@ -15,7 +15,7 @@ void execute(char *command, char **env)
 	char **tokens = NULL;
 	int token_count = 0;
 
-	token = strtok(command, " \n"); /* Tokenize the command string */
+	token = strtok(command, " \n"); /* Tokenization */
 	if (token == NULL)
 		return;
 
@@ -31,21 +31,21 @@ void execute(char *command, char **env)
 		token_count++;
 		token = strtok(NULL, " \n");
 	}
-	tokens[token_count] = NULL; /* Set the last element to NULL */
-	child_pid = fork(); /* Create child process */
+	tokens[token_count] = NULL;
+	child_pid = fork(); /* Fork syscall to create child process */
 	if (child_pid == -1)
 	{
-		perror("fork");
-		free(tokens); /* Free allocated memory */
+		perror("Fork Failure");
+		free(tokens);
 		return;
 	}
-	if (child_pid == 0) /* Child process */
+	if (child_pid == 0)
 	{
 		if (tokens[0][0] == '/')
 		{
 			if (execve(tokens[0], tokens, env) == -1) /* Execute using execve */
 			{
-				perror("execve error");
+				perror("Execve Error");
 				exit(EXIT_FAILURE); /* Exit child process with failure status */
 			}
 		}
@@ -69,7 +69,7 @@ void execute(char *command, char **env)
 			{
 				if (execve(full_path, tokens, env) == -1)
 				{
-					perror("execve error");
+					perror("Execve Error");
 					exit(EXIT_FAILURE);
 				}
 				free(full_path);
@@ -83,8 +83,8 @@ void execute(char *command, char **env)
 	}
 	}
 	else
-	{ /* Parent process */
-		waitpid(child_pid, NULL, 0); /* Wait for child process to finish */
-		free(tokens); /* Free allocated memory */
+	{
+		waitpid(child_pid, NULL, 0); /* Await end of child */
+		free(tokens);
 	}
 }
