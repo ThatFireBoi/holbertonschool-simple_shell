@@ -67,6 +67,8 @@ hsh main.c shell.c test_ls_2
 hsh main.c shell.c test_ls_2
 $
 ```
+## Flowchart
+![shelldraft copy](https://github.com/ThatFireBoi/holbertonschool-simple_shell/assets/130172504/f3f08136-113e-41dd-b26a-a7e27fc4fda4)
 
 ### Usage Examples
 
